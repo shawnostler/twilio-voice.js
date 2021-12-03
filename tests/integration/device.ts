@@ -132,21 +132,14 @@ describe('Device', function() {
       });
 
       it('should receive the correct custom parameters from the TwiML app', () => {
-        const comparator =
-          ([customParamKeyA]: string[], [customParamKeyB]: string[]) => {
-            return customParamKeyA.localeCompare(customParamKeyB);
-          };
-        assert.deepEqual(
-          Array.from(call2.customParameters.entries()).sort(comparator),
-          [
-            ['custom + param', '我不吃蛋'],
-            ['custom1', 'foo + bar'],
-            ['custom2', 'undefined'],
-            ['custom3', '我不吃蛋'],
-            ['duplicate', '123456'],
-            ['foobar', 'some + value'],
-          ],
-        );
+        assert.deepEqual(Array.from(call2.customParameters.entries()), [
+          ['duplicate', '123456'],
+          ['custom + param', '我不吃蛋'],
+          ['foobar', 'some + value'],
+          ['custom1', 'foo + bar'],
+          ['custom2', 'undefined'],
+          ['custom3', '我不吃蛋'],
+        ]);
       });
 
       it('should post metrics', (done) => {
